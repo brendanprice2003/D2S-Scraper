@@ -1,0 +1,48 @@
+{
+    "Response": {
+        "displayProperties": {
+            "description": "Delve into the depths of Titan's methane sea in search of lost technology and knowledge.",
+            "name": "Season of the Deep",
+            "icon": "/common/destiny2_content/icons/DestinySeasonDefinition_f82759315a8d05fc597778d2086acee4.png",
+            "hasIcon": true
+        },
+        "backgroundImagePath": "/img/destiny_content/seasons/backgrounds/background_season_21.png",
+        "seasonNumber": 21,
+        "startDate": "2023-05-23T17:00:00Z",
+        "endDate": "2023-08-22T17:00:00Z",
+        "seasonPassHash": 655248278,
+        "seasonPassProgressionHash": 3127357249,
+        "artifactItemHash": 2785855278,
+        "sealPresentationNodeHash": 1270675701,
+        "startTimeInSeconds": "0",
+        "seasonalChallengesPresentationNodeHash": 3443694067,
+        "seasonPassUnlockHash": 0,
+        "preview": {
+            "description": "Get the Season Pass and instantly unlock the Exotic Auto Rifle, Centrifuse. Also get XP boosts and access to seasonal activities to earn new rewards.",
+            "linkPath": "/SeasonOfTheDeep",
+            "images": [
+                {
+                    "thumbnailImage": "/img/destiny_content/seasons/preview/season21/item0-thumbnail.jpg",
+                    "highResImage": "/img/destiny_content/seasons/preview/season21/item0-highres.jpg"
+                },
+                {
+                    "thumbnailImage": "/img/destiny_content/seasons/preview/season21/item1-thumbnail.jpg",
+                    "highResImage": "/img/destiny_content/seasons/preview/season21/item1-highres.jpg"
+                },
+                {
+                    "thumbnailImage": "/img/destiny_content/seasons/preview/season21/item2-thumbnail.jpg",
+                    "highResImage": "/img/destiny_content/seasons/preview/season21/item2-highres.jpg"
+                }
+            ]
+        },
+        "hash": 2758726569,
+        "index": 20,
+        "redacted": false,
+        "blacklisted": false
+    },
+    "ErrorCode": 1,
+    "ThrottleSeconds": 0,
+    "ErrorStatus": "Success",
+    "Message": "Ok",
+    "MessageData": {}
+}
