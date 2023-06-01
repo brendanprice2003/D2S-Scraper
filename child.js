@@ -7,6 +7,7 @@ import { makeRequest } from './utils/request/makeRequest.js';
 import { memshiptypes, days } from './utils/defs/defs.js';
 import { fileURLToPath } from 'url';
 
+// ..
 const log = console.log.bind(console);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,23 +27,24 @@ async function doRequestCycle (memship) {
         };
 
         // else return
-        return res;
+        return [platform, res];
     });
 
-    // stdout
+    // time stdout
     const time = `[${new Date().getDate()}:${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()} (${days[new Date().getDay()]})]`;
     log(`${time} ${chalk.blue('Requested Resource')} ${chalk.magenta('/Profile')} ${chalk.blue('with')} ${chalk.red(platform)}:${chalk.red(memship)}`);
 
     // return it
-    return response;
+    return [platform, response];
 };
 
 export async function doChildProcess (pid = '.') {
 
+    // time stdout
     const start = `[${new Date().getDate()}:${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}]`;
     log(`${start} Thread ${pid} ${chalk.green('Created')}`);
 
-    // 
+    // ..
     setInterval(async () => {
 
         // check if this should be running
@@ -55,18 +57,24 @@ export async function doChildProcess (pid = '.') {
             datJSON.current = memship;
 
             fs.writeFileSync(path.resolve(__dirname, './temp/dat.json'), JSON.stringify(datJSON, null, 4));
-            const response = await doRequestCycle(BigInt(memship));
+            const promiseResponse = await doRequestCycle(BigInt(memship));
+            const memshipType = promiseResponse[0];
+            const response = promiseResponse[1];
             
             // account found
             if (response.ErrorCode === 1) {
 
-                // increment profile count
+                // pull dat and currently stored members
                 let dat = JSON.parse(fs.readFileSync(path.resolve(__dirname, './temp/dat.json')));
+                let mems = JSON.parse(fs.readFileSync(path.resolve(__dirname, './temp/mems.json')));
+
+                // add user to temp
+                mems[dat.profiles] = [`${memshipType}:${memship}`];
+                fs.writeFileSync(path.resolve(__dirname, './temp/mems.json'), JSON.stringify(mems, null, 1));
+
+                // increment profile count
                 dat.profiles++;
                 fs.writeFileSync(path.resolve(__dirname, './temp/dat.json'), JSON.stringify(dat, null, 4));
-
-                // get current json
-                let userProfile = JSON.parse(fs.readFileSync(path.resolve(__dirname, './temp/prfs.json')));
 
                 // remove unwanted data
                 let strippedProfile = {};
@@ -85,11 +93,12 @@ export async function doChildProcess (pid = '.') {
                     strippedProfile.characterProgressions[charHash] = response.Response.characterProgressions.data[charHash].progressions;
                 };
 
-                // new profile
+                // merge the stripped profile into a new array, ready for json
+                let userProfile = {};
                 userProfile[memship] = strippedProfile;
 
-                // append profile
-                fs.writeFileSync(path.resolve(__dirname, './temp/prfs.json'), JSON.stringify(userProfile, null, 0));
+                // create new json
+                fs.writeFileSync(path.resolve(__dirname, `./users/${memshipType}_${memship}.json`), JSON.stringify(userProfile));
             };
         };
         

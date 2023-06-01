@@ -6,20 +6,20 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path from 'path';
 
+// ..
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-getMyProfile();
-async function getMyProfile () {
+// configure threads
+// an even (lower than 16) number works best
+const THREADCOUNT = 16;
+let threadsArr = [];
 
-    // get my profile for the current season hash
-    await fetch('https://www.bungie.net/Platform/Destiny2/1/Profile/4611686018447977370/?components=100', {headers: {"X-API-Key": '12a18fbb685a4a90bace718395c81ca8'}})
-    .then((res) => {
-        return res.json();
-    })
-    .then((data) => {
-        getSeasonDefinition(data.Response.profile.data.currentSeasonHash);
-    });
+// exec
+main();
+
+// do configuration before doing anything else
+async function getMyProfile () {
 
     // get the current season definition and store it
     async function getSeasonDefinition (hash) {
@@ -31,14 +31,27 @@ async function getMyProfile () {
             fs.writeFileSync(path.resolve(__dirname, './temp/season.json'), JSON.stringify(data, null, 4));
         });
     };
+
+    // get MY (brendan's; remember how you spell it k) profile for the current season hash
+    await fetch('https://www.bungie.net/Platform/Destiny2/1/Profile/4611686018447977370/?components=100', {headers: {"X-API-Key": '12a18fbb685a4a90bace718395c81ca8'}})
+    .then((res) => {
+        return res.json();
+    })
+    .then((data) => {
+        getSeasonDefinition(data.Response.profile.data.currentSeasonHash);
+    });
 };
 
-// configure threads
-let threadCount = 128;
-let threads = [];
+// main entry point
+async function main () {
 
-for (let i=0; i<threadCount; i++) {
-    threads.push(doChildProcess(i));
+    await getMyProfile();
+
+    // ..
+    for (let i=0; i<THREADCOUNT; i++) {
+        threadsArr.push(doChildProcess(i));
+    };
+
+    // "promise-fy" all processes
+    Promise.all(threadsArr);
 };
-
-Promise.all(threads);

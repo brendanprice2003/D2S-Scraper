@@ -1,6 +1,6 @@
 node_modules
 package-lock.json
+users
+temp/dat.json
 temp/mems.json
 temp/season.json
-temp/dat.json
-users/
