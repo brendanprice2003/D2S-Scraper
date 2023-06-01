@@ -1,3 +1,6 @@
 node_modules
 package-lock.json
-temp/prfs.json
+temp/mems.json
+temp/season.json
+temp/dat.json
+users/
