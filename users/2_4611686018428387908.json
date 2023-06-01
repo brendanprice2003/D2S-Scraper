@@ -1,0 +1,62 @@
+{
+  "Response": {
+    "responseMintedTimestamp": "2023-06-01T02:09:59.278Z",
+    "secondaryComponentsMintedTimestamp": "0001-01-01T00:00:00Z",
+    "profile": {
+      "data": {
+        "userInfo": {
+          "crossSaveOverride": 1,
+          "applicableMembershipTypes": [
+            2,
+            3,
+            5,
+            6,
+            1
+          ],
+          "isPublic": true,
+          "membershipType": 1,
+          "membershipId": "4611686018447977370",
+          "displayName": "BRThundergamer",
+          "bungieGlobalDisplayName": "brendanprice",
+          "bungieGlobalDisplayNameCode": 4702
+        },
+        "dateLastPlayed": "2023-05-30T01:32:49Z",
+        "versionsOwned": 1023,
+        "characterIds": [
+          "2305843009263012379",
+          "2305843009263012380",
+          "2305843010387204317"
+        ],
+        "seasonHashes": [
+          2809059425,
+          2809059424,
+          2809059427,
+          2809059426,
+          2809059429,
+          2809059428,
+          2809059431,
+          2809059430,
+          2809059433,
+          2809059432,
+          2758726568,
+          2758726569,
+          2758726570,
+          2758726571
+        ],
+        "eventCardHashesOwned": [
+          3461628897
+        ],
+        "currentSeasonHash": 2758726569,
+        "currentSeasonRewardPowerCap": 1810,
+        "currentGuardianRank": 11,
+        "lifetimeHighestGuardianRank": 11
+      },
+      "privacy": 1
+    }
+  },
+  "ErrorCode": 1,
+  "ThrottleSeconds": 0,
+  "ErrorStatus": "Success",
+  "Message": "Ok",
+  "MessageData": {}
+}
